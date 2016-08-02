@@ -1,0 +1,18 @@
+<ion-view>
+  <ion-content class="padding">
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-positive" ng-click="openContactModal()">
+          Add contacts
+        </button>
+      </div>
+    </div>
+    <div class="card" ng-repeat="contact in contacts">
+      <div class="item item-avatar">
+        <img ng-src="{{collection.selectedImage}}" alt="" ng-click="openAvatarModal()" style="cursor:pointer"></img>
+        <h2>{{contact.name}}</h2>
+        <p>{{contact.phone}}</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
