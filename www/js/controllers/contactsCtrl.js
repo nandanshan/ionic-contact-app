@@ -1,12 +1,12 @@
 angular.module('starter')
-.controller('contactsCtrl',['$scope', '$ionicModal', '$cordovaImagePicker', '$ionicPlatform',function($scope, $ionicModal, $cordovaImagePicker, $ionicPlatform){
+.controller('contactsCtrl',['$scope', '$ionicModal', '$cordovaImagePicker', '$ionicPlatform', 'contactService', '$cordovaContacts',function($scope, $ionicModal, $cordovaImagePicker, $ionicPlatform, contactService, $cordovaContacts){
   var sc = $scope;
   sc.contacts = [];
   sc.collection = {
         selectedImage : ''
     };
 
-
+  
     $ionicPlatform.ready(function() {
 
             sc.getImages = function() {
@@ -23,6 +23,7 @@ angular.module('starter')
                     for (var i = 0; i < results.length; i++) {
                         sc.collection.selectedImage = results[i];   // We loading only one image so we can use it like this
                         }
+                        sc.modal.remove();
                 }, function(error) {
                     console.log('Error: ' + JSON.stringify(error));    // In case of error
                 });
@@ -33,7 +34,43 @@ angular.module('starter')
 
 
 
+sc.getAllContacts = function(){
+  contactService.getAllContacts()
+    .then(function(result){
+        console.log(result);
+        sc.contacts = result;
+    },function(err){
+      console.log(err);
+    })
+}
 
+sc.saveContact = function(newContact) {
+  if(newContact && (newContact.name && newContact.phone)){
+
+    var contact = {
+      "note":"myApp",
+      "displayName": '',
+      "phoneNumbers": [
+        {
+        "value": 0,
+        "type": "mobile"
+      }]
+    };
+    contact.displayName = newContact.name;
+    contact.phoneNumbers[0].value = newContact.phone;
+    console.log(contact);
+    contactService.saveContact(contact)
+    .then(function(result){
+      console.log(result);
+      sc.modal.remove();
+      sc.getAllContacts();
+    },function(err){
+      console.log(err);
+    })
+  }else{
+    console.log('invalid contact information');
+  }
+}
 
 
 
@@ -57,15 +94,9 @@ angular.module('starter')
     });
   }
 
-  sc.addNewContact = function(contact){
-    console.log(contact);
-    if(contact && (contact.name && contact.phone)) {
-      sc.contacts.push(contact);
-      sc.modal.remove();
-    }
-  }
-
   sc.cancelModal = function(){
     sc.modal.remove();
   }
+
+  sc.getAllContacts();
 }]);

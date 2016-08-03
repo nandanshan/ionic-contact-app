@@ -10,8 +10,8 @@
     <div class="card" ng-repeat="contact in contacts">
       <div class="item item-avatar">
         <img ng-src="{{collection.selectedImage}}" alt="" ng-click="openAvatarModal()" style="cursor:pointer"></img>
-        <h2>{{contact.name}}</h2>
-        <p>{{contact.phone}}</p>
+        <h2>{{contact.displayName}}</h2>
+        <p>{{contact.phoneNumbers[0].value}}</p>
       </div>
     </div>
   </ion-content>
