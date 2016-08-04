@@ -4,9 +4,9 @@ angular.module('starter')
 
     var getAllContacts = function(){
       var options = {
-        filter : 'myApp',
+        filter : '',
         multiple: true,
-        fields : ['note']
+        fields : ['displayName']
       };
       options.hasPhoneNumber = true;
       console.log('option',options);

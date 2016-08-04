@@ -47,11 +47,12 @@ angular.module('starter', ['ionic', 'ngCordova'])
         }
       }
     })
-    .state('home.search', {
-      url: '/search',
+    .state('home.map', {
+      url: '/map',
       views: {
         'nav1': {
-          templateUrl: 'templates/search.html'
+          templateUrl: 'templates/map.html',
+          controller: 'mapCtrl'
         }
       }
     })

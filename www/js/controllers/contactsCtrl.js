@@ -1,45 +1,38 @@
 angular.module('starter')
-.controller('contactsCtrl',['$scope', '$ionicModal', '$cordovaImagePicker', '$ionicPlatform', 'contactService', '$cordovaContacts',function($scope, $ionicModal, $cordovaImagePicker, $ionicPlatform, contactService, $cordovaContacts){
+.controller('contactsCtrl',['$scope', '$ionicLoading', '$ionicModal', '$ionicPlatform', 'contactService', 'imageService', 'loadingService',function($scope, $ionicLoading, $ionicModal, $ionicPlatform, contactService, imageService, loadingService){
+
   var sc = $scope;
   sc.contacts = [];
   sc.collection = {
         selectedImage : ''
     };
 
-  
-    $ionicPlatform.ready(function() {
 
-            sc.getImages = function() {
-                // Image picker will load images according to these settings
-                var options = {
-                    maximumImagesCount: 1, // Max number of selected images, I'm using only one for this example
-                    width: 800,
-                    height: 800,
-                    quality: 80            // Higher is better
-                };
+  $ionicPlatform.ready(function() {
 
-                $cordovaImagePicker.getPictures(options).then(function (results) {
-                    // Loop through acquired images
-                    for (var i = 0; i < results.length; i++) {
-                        sc.collection.selectedImage = results[i];   // We loading only one image so we can use it like this
-                        }
-                        sc.modal.remove();
-                }, function(error) {
-                    console.log('Error: ' + JSON.stringify(error));    // In case of error
-                });
-            };
-
+  sc.getImages = function() {
+      imageService.getImages()
+        .then(function (results) {
+          console.log(results);
+          // the result will contain only 1 image hence fetching the 0th index of the array
+          sc.collection.selectedImage = results[0];
+          sc.modal.remove();
+        }, function(error) {
+              console.log('Error: ' + JSON.stringify(error));
         });
-
+      };
 
 
 
 sc.getAllContacts = function(){
+  loadingService.show();
   contactService.getAllContacts()
     .then(function(result){
+      loadingService.hide();
         console.log(result);
         sc.contacts = result;
     },function(err){
+      loadingService.hide();
       console.log(err);
     })
 }
@@ -72,7 +65,7 @@ sc.saveContact = function(newContact) {
   }
 }
 
-
+});
 
   sc.openContactModal = function(){
     $ionicModal.fromTemplateUrl('templates/contactModal.html', {
@@ -98,5 +91,5 @@ sc.saveContact = function(newContact) {
     sc.modal.remove();
   }
 
-  sc.getAllContacts();
+ sc.getAllContacts();
 }]);
