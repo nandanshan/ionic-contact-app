@@ -97,6 +97,6 @@ angular.module('starter')
         sc.init();
       })
     }
-  });
+  
 
 }]);
