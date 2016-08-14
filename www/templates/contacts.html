@@ -3,16 +3,23 @@
     <div class="row">
       <div class="col">
         <button class="button button-block button-positive" ng-click="openContactModal()">
-          Add contacts
+          Add new contacts
         </button>
       </div>
     </div>
-    <div class="card" ng-repeat="contact in contacts">
+    <ion-list>
+      <ion-item  class="item item-avatar" ng-repeat="contact in contacts">
+        <img ng-src="{{collection.selectedImage}}" alt="" ng-click="openAvatarModal()" style="cursor:pointer"></img>
+        <h2>{{contact.displayName}}</h2>
+        <p>{{contact.phoneNumbers[0].value}}</p>
+      </ion-item>
+    </ion-list>
+    <!-- <div class="card" ng-repeat="contact in contacts">
       <div class="item item-avatar">
         <img ng-src="{{collection.selectedImage}}" alt="" ng-click="openAvatarModal()" style="cursor:pointer"></img>
-        <h2>{{contact.name}}</h2>
-        <p>{{contact.phone}}</p>
+        <h2>{{contact.displayName}}</h2>
+        <p>{{contact.phoneNumbers[0].value}}</p>
       </div>
-    </div>
+    </div> -->
   </ion-content>
 </ion-view>

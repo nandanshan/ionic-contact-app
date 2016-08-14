@@ -27,7 +27,7 @@ angular.module('starter', ['ionic', 'ngCordova'])
   $stateProvider
     .state('home', {
     url: '/home',
-    abstract: true,
+    // abstract: true,
     templateUrl: 'templates/home.html'
     })
     .state('home.landing',{
@@ -47,15 +47,24 @@ angular.module('starter', ['ionic', 'ngCordova'])
         }
       }
     })
-    .state('home.search', {
-      url: '/search',
+    .state('home.map', {
+      url: '/map',
       views: {
         'nav1': {
-          templateUrl: 'templates/search.html'
+          templateUrl: 'templates/map.html',
+          controller: 'mapCtrl'
         }
       }
     })
-    ;
+    .state('home.search',{
+      url: '/search',
+      views: {
+        'nav1': {
+            templateUrl: 'templates/search.html'
+          }
+        }
+
+    })
 
   $urlRouterProvider.otherwise('/home/landing');
 })
