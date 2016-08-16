@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('contact')
 .service('loadingService',['$ionicLoading',function($ionicLoading){
 
   var show = function(){

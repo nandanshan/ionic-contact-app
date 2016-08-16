@@ -1,5 +1,5 @@
 (function(){
-  angular.module('starter')
+  angular.module('map')
     .directive('gMap', function(){
       return{
         restrict : 'E',
@@ -15,10 +15,10 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
           });
         },
-        template: '<div id="map"></div>'
+        templateUrl: 'templates/map/gMap.html'
       }
     })
-    .directive('gBtnCenter',function(){
+    .directive('gMapCenterBtn',function(){
       return{
         restrict : 'E',
         replace: true,
@@ -34,10 +34,10 @@
           });
 
         },
-        template:'<div id="btnCenter" class="btnMapCenter">Center Map</div>'
+        templateUrl:'templates/map/gMapCenterBtn.html'
       }
     })
-    .directive('gBtnLocation',['$cordovaGeolocation',function($cordovaGeolocation){
+    .directive('gMapLocationBtn',['$cordovaGeolocation',function($cordovaGeolocation){
       return{
         restrict : 'E',
         replace : true,
@@ -91,7 +91,7 @@
             });
           });
         },
-        template:'<div id="btnLocation" class="btnMapLocation"><a class="button-icon icon ion-pinpoint"></a></div>'
+        templateUrl:'templates/map/gMapLocationBtn.html'
       }
     }])
 })();

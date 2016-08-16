@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('contact')
 .service('contactService',['$cordovaContacts', '$ionicPlatform',function($cordovaContacts, $ionicPlatform){
 
 

@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('contact')
 .service('imageService',['$cordovaImagePicker',function($cordovaImagePicker){
 
   var options = {

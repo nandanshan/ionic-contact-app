@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('contact',[])
 .controller('contactsCtrl',['$scope', '$ionicLoading', '$ionicModal', '$ionicPlatform', 'contactService', 'imageService', 'loadingService',function($scope, $ionicLoading, $ionicModal, $ionicPlatform, contactService, imageService, loadingService){
 
   var sc = $scope;

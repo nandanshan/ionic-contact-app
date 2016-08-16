@@ -1,5 +1,5 @@
 (function(){
-  angular.module('starter')
+  angular.module('map',[])
     .controller('mapCtrl',[
       '$scope',
       '$rootScope',
